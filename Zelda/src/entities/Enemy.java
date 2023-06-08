@@ -31,6 +31,9 @@ public class Enemy extends Entity {
 	}
 
 	public void tick() {
+		
+		if(this.calculateDistance(this.getX(), this.getY(), Game.player.getX(), Game.player.getY()) < 40) {
+		
 		if (this.isColliddingWithPlayer() == false) {
 
 			if (x < Game.player.getX() && World.isFree(x + speed, this.getY())
@@ -55,6 +58,7 @@ public class Enemy extends Entity {
 				Game.player.life -= Game.random.nextInt(3);
 				Game.player.isDamage = true;
 			}
+		}
 		}
 
 		// Animation
@@ -111,7 +115,7 @@ public class Enemy extends Entity {
 
 		return enemyCurrent.intersects(player);
 	}
-
+																				
 	public boolean isCollidding(int xnext, int ynext) {
 		Rectangle enemyCurrent = new Rectangle(xnext + maskX, ynext + maskY, maskW, maskH); // Classe que cria
 																							// retangulos fictícios para
