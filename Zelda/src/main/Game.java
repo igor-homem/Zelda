@@ -13,11 +13,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import entities.BulletShoot;
@@ -64,6 +67,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	
 	
 	public Menu menu;
+	
+	
+	public int[] pixels;
+	
+	
 /***/
 	public boolean saveGame = false;
 	
@@ -80,6 +88,54 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		// Inicializando Objetos
 		ui = new UI();
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		
+
+		class PixelManipulationExample {
+
+		    public static void main(String[] args) {
+		        try {
+		        	// Carrega a imagem
+		            BufferedImage image = ImageIO.read(new File("input.jpg"));
+
+		            // Obtém a largura e altura da imagem
+		            int width = image.getWidth();
+		            int height = image.getHeight();
+
+		            // Percorre todos os pixels da imagem
+		            for (int y = 0; y < height; y++) {
+		                for (int x = 0; x < width; x++) {
+		                    // Obtém o valor do pixel (RGB)
+		                    int pixel = image.getRGB(x, y);
+
+		                    // Separa os componentes de cor (vermelho, verde, azul)
+		                    int red = (pixel >> 16) & 0xFF;
+		                    int green = (pixel >> 8) & 0xFF;
+		                    int blue = pixel & 0xFF;
+
+		                    // Manipula os componentes de cor
+		                    // Exemplo: inverte as cores
+		                    int invertedRed = 255 - red;
+		                    int invertedGreen = 255 - green;
+		                    int invertedBlue = 255 - blue;
+
+		                    // Combina os componentes de cor invertidos
+		                    int invertedPixel = (invertedRed << 16) | (invertedGreen << 8) | invertedBlue;
+
+		                    // Define o novo valor do pixel na imagem
+		                    image.setRGB(x, y, invertedPixel);
+		                }
+		            }
+
+		            // Salva a imagem resultante
+		            File output = new File("output.jpg");
+		            ImageIO.write(image, "jpg", output);
+
+		            System.out.println("Manipulação de pixels concluída!");
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
 
 		entities = new ArrayList<Entity>();
 		enemies = new ArrayList<Enemy>();

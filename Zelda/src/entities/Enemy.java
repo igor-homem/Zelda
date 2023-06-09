@@ -41,7 +41,7 @@ public class Enemy extends Entity {
 				x += speed;
 			} else if (x > Game.player.getX() && World.isFree(x - speed, this.getY())
 					&& !isCollidding(x - speed, this.getY())) {
-				x -= speed;
+				x -= speed;																			
 			}
 
 			if (y < Game.player.getY() && World.isFree(this.getX(), y + speed)
