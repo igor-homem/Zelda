@@ -72,6 +72,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public int[] pixels;
 	
 	
+	
 /***/
 	public boolean saveGame = false;
 	
