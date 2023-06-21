@@ -54,6 +54,7 @@ public class Enemy extends Entity {
 		} else {
 			// Estamos colidindo
 			if (Game.random.nextInt(100) < 10) {
+				//Sound.hurtEffect.play();
 				Sound.hurtEffect.play();
 				Game.player.life -= Game.random.nextInt(3);
 				Game.player.isDamage = true;
@@ -101,6 +102,7 @@ public class Enemy extends Entity {
 			if (e instanceof BulletShoot) {
 				if (Entity.isCollidding(this, e)) {
 					isDamage = true;
+					Sound.enemyEffect.play();
 					life--;
 					Game.bulletShoot.remove(i);
 					return;
