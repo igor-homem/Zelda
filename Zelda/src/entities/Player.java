@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import graficos.Spritesheet;
 import main.Game;
+import main.Sound;
 import world.Camera;
 import world.World;
 
@@ -143,7 +144,7 @@ public class Player extends Entity {
 
 			if (hasGun && ammo > 0) {
 				ammo--;
-
+				Sound.shotEffect.play();
 				int px = 0;
 				int py = 8;
 				double angle = 0;
@@ -209,6 +210,7 @@ public class Player extends Entity {
 			if (e instanceof Bullet) {
 				if (Entity.isCollidding(this, e)) {
 					ammo += 50;
+					Sound.ammoEffect.play();
 					// System.out.println(ammo);
 					if (ammo >= 100) {
 						ammo = 100;
